@@ -1,0 +1,99 @@
+{
+    "diagnosis": [
+        {
+            "idDiagnosis": 1,
+            "diagnosis_name": "hypertension",
+            "category": "cardiovascular"
+        },
+        {
+            "idDiagnosis": 2,
+            "diagnosis_name": "asthma",
+            "category": "respiratory"
+        },
+        {
+            "idDiagnosis": 3,
+            "diagnosis_name": "migraine",
+            "category": "neurological"
+        },
+        {
+            "idDiagnosis": 4,
+            "diagnosis_name": "diabetes",
+            "category": "endocrine"
+        },
+        {
+            "idDiagnosis": 5,
+            "diagnosis_name": "chickenpox",
+            "category": "infection"
+        }
+    ],
+    "doctors": [
+        {
+            "iddoctors": 1,
+            "doctor_name": "marc rebbit",
+            "specialization": "cardiology"
+        },
+        {
+            "iddoctors": 2,
+            "doctor_name": "raymart diaz",
+            "specialization": "pediatrics"
+        },
+        {
+            "iddoctors": 3,
+            "doctor_name": "axel flores",
+            "specialization": "neurology"
+        },
+        {
+            "iddoctors": 4,
+            "doctor_name": "eden rose",
+            "specialization": "pulmonology"
+        }
+    ],
+    "patient": [
+        {
+            "idPatient": 1,
+            "name": "erika",
+            "age": "22",
+            "Diagnosis_idDiagnosis": 1
+        },
+        {
+            "idPatient": 2,
+            "name": "zyra",
+            "age": "25",
+            "Diagnosis_idDiagnosis": 2
+        },
+        {
+            "idPatient": 3,
+            "name": "jacob",
+            "age": "40",
+            "Diagnosis_idDiagnosis": 3
+        },
+        {
+            "idPatient": 4,
+            "name": "rabang",
+            "age": "30",
+            "Diagnosis_idDiagnosis": 4
+        }
+    ],
+    "doctors_has_patient": [
+        {
+            "doctors_iddoctors": 1,
+            "Patient_idPatient": 1,
+            "Patient_Diagnosis_idDiagnosis": 1
+        },
+        {
+            "doctors_iddoctors": 2,
+            "Patient_idPatient": 2,
+            "Patient_Diagnosis_idDiagnosis": 2
+        },
+        {
+            "doctors_iddoctors": 3,
+            "Patient_idPatient": 3,
+            "Patient_Diagnosis_idDiagnosis": 3
+        },
+        {
+            "doctors_iddoctors": 4,
+            "Patient_idPatient": 4,
+            "Patient_Diagnosis_idDiagnosis": 4
+        }
+    ]
+}

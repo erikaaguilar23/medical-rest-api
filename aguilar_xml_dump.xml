@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="mydb">
+
+    <!-- ===================== -->
+    <!--       DIAGNOSIS       -->
+    <!-- ===================== -->
+    <diagnosis_table>
+        <diagnosis>
+            <idDiagnosis>1</idDiagnosis>
+            <diagnosis_name>hypertension</diagnosis_name>
+            <category>cardiovascular</category>
+        </diagnosis>
+        <diagnosis>
+            <idDiagnosis>2</idDiagnosis>
+            <diagnosis_name>asthma</diagnosis_name>
+            <category>respiratory</category>
+        </diagnosis>
+        <diagnosis>
+            <idDiagnosis>3</idDiagnosis>
+            <diagnosis_name>migraine</diagnosis_name>
+            <category>neurological</category>
+        </diagnosis>
+        <diagnosis>
+            <idDiagnosis>4</idDiagnosis>
+            <diagnosis_name>diabetes</diagnosis_name>
+            <category>endocrine</category>
+        </diagnosis>
+        <diagnosis>
+            <idDiagnosis>5</idDiagnosis>
+            <diagnosis_name>chickenpox</diagnosis_name>
+            <category>infection</category>
+        </diagnosis>
+    </diagnosis_table>
+
+
+    <!-- ===================== -->
+    <!--        DOCTORS        -->
+    <!-- ===================== -->
+    <doctors_table>
+        <doctor>
+            <iddoctors>1</iddoctors>
+            <doctor_name>marc rebbit</doctor_name>
+            <specialization>cardiology</specialization>
+        </doctor>
+        <doctor>
+            <iddoctors>2</iddoctors>
+            <doctor_name>raymart diaz</doctor_name>
+            <specialization>pediatrics</specialization>
+        </doctor>
+        <doctor>
+            <iddoctors>3</iddoctors>
+            <doctor_name>axel flores</doctor_name>
+            <specialization>neurology</specialization>
+        </doctor>
+        <doctor>
+            <iddoctors>4</iddoctors>
+            <doctor_name>eden rose</doctor_name>
+            <specialization>pulmonology</specialization>
+        </doctor>
+    </doctors_table>
+
+
+    <!-- ===================== -->
+    <!--        PATIENTS       -->
+    <!-- ===================== -->
+    <patients_table>
+        <patient>
+            <idPatient>1</idPatient>
+            <name>erika</name>
+            <age>22</age>
+            <Diagnosis_idDiagnosis>1</Diagnosis_idDiagnosis>
+        </patient>
+        <patient>
+            <idPatient>2</idPatient>
+            <name>zyra</name>
+            <age>25</age>
+            <Diagnosis_idDiagnosis>2</Diagnosis_idDiagnosis>
+        </patient>
+        <patient>
+            <idPatient>3</idPatient>
+            <name>jacob</name>
+            <age>40</age>
+            <Diagnosis_idDiagnosis>3</Diagnosis_idDiagnosis>
+        </patient>
+        <patient>
+            <idPatient>4</idPatient>
+            <name>rabang</name>
+            <age>30</age>
+            <Diagnosis_idDiagnosis>4</Diagnosis_idDiagnosis>
+        </patient>
+    </patients_table>
+
+
+    <!-- =============================== -->
+    <!--   DOCTORS–PATIENT RELATION     -->
+    <!-- =============================== -->
+    <doctors_has_patient_table>
+        <assignment>
+            <doctors_iddoctors>1</doctors_iddoctors>
+            <Patient_idPatient>1</Patient_idPatient>
+            <Patient_Diagnosis_idDiagnosis>1</Patient_Diagnosis_idDiagnosis>
+        </assignment>
+        <assignment>
+            <doctors_iddoctors>2</doctors_iddoctors>
+            <Patient_idPatient>2</Patient_idPatient>
+            <Patient_Diagnosis_idDiagnosis>2</Patient_Diagnosis_idDiagnosis>
+        </assignment>
+        <assignment>
+            <doctors_iddoctors>3</doctors_iddoctors>
+            <Patient_idPatient>3</Patient_idPatient>
+            <Patient_Diagnosis_idDiagnosis>3</Patient_Diagnosis_idDiagnosis>
+        </assignment>
+        <assignment>
+            <doctors_iddoctors>4</doctors_iddoctors>
+            <Patient_idPatient>4</Patient_idPatient>
+            <Patient_Diagnosis_idDiagnosis>4</Patient_Diagnosis_idDiagnosis>
+        </assignment>
+    </doctors_has_patient_table>
+
+</database>
