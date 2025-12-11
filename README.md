@@ -1,61 +1,133 @@
-## Medical REST API
-A CRUD REST API built with Flask and MySQL for managing medical data.
-Supports JSON and XML output formats and includes JWT authentication for secure endpoints.
+## Medical REST API (Flask & MySQL)
 
-## Project Description
-This project implements a REST API for a medical database containing diagnoses, doctors, patients, and assignments.
-It allows users to create, read, update, and delete records, search for specific entries, and export data in JSON or XML format.
+Project Description
 
-Key Features:
+This project is a CRUD REST API for managing hospital data, including patients, doctors, diagnoses, and assignments.
+The API supports JSON and XML responses, JWT authentication, and comes with automated tests for all endpoints.
+It is designed to act as an interface for clients that understand JSON or XML and to demonstrate secure and tested API development.
 
-CRUD operations for diagnoses, doctors, patients, and assignments
-Search functionality for diagnoses, doctors, and patients
-Secure endpoints using JWT authentication
-JSON or XML output formatting
-Fully tested endpoints (manual/Postman or automated)
-Installation Instructions
+## Installation Instructions
 
-## Clone the repository:
-git clone 
-cd medical-rest-api 
+Clone the repository
+git clone https://github.com/erikaaguilar23/medical-rest-api.git
+cd medical-rest-api
+
+## Create a virtual environment
+python -m venv venv
+
+##Activate the virtual environment
+source venv/Scripts/activate
+
+## Install dependencies
 pip install -r requirements.txt
 
-Set up your MySQL database:
-DB_HOST=localhost DB_USER=root DB_PASS=your_password DB_NAME=mydb SECRET_KEY=your_secret_key
+## MySQL Database Setup
+
+Create the database:
+
+CREATE DATABASE hospital;
+USE hospital;
 
 
-## Install Requirements
-python -m venv venv
-venv\Scripts\activate 
-pip install -r requirements.txt 
-pip install flask mysql-connector-python dicttoxml pyjwt
+Create tables (examples):
 
-## Run the Flask API server:
-python app.py
+CREATE TABLE diagnosis (
+    idDiagnosis INT AUTO_INCREMENT PRIMARY KEY,
+    diagnosis_name VARCHAR(255) NOT NULL,
+    category VARCHAR(255) NOT NULL
+);
 
-## Usage Examples
-Login POST /login Content-Type: application/json
+CREATE TABLE doctors (
+    iddoctors INT AUTO_INCREMENT PRIMARY KEY,
+    doctor_name VARCHAR(255) NOT NULL,
+    specialization VARCHAR(255) NOT NULL
+);
 
-{ "username": "admin", "password": "1234" }
+CREATE TABLE patient (
+    idPatient INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    age INT NOT NULL,
+    Diagnosis_idDiagnosis INT,
+    FOREIGN KEY (Diagnosis_idDiagnosis) REFERENCES diagnosis(idDiagnosis)
+);
 
-Response:
+CREATE TABLE doctors_has_patient (
+    doctors_iddoctors INT,
+    Patient_idPatient INT,
+    Patient_Diagnosis_idDiagnosis INT,
+    PRIMARY KEY (doctors_iddoctors, Patient_idPatient),
+    FOREIGN KEY (doctors_iddoctors) REFERENCES doctors(iddoctors),
+    FOREIGN KEY (Patient_idPatient) REFERENCES patient(idPatient)
+);
 
-{ "token": "jwt_token_here" }
+## Running the API
+Activate your virtual environment if not already active.
 
-Get All Diagnoses GET /diagnosis?format=json Authorization: Bearer
+## Run the Flask app:
+pthon app.py
 
-Response:
-
-[ {"id": 1, "diagnosis_name": "Flu", "category": "Viral"}, {"id": 2, "diagnosis_name": "Diabetes", "category": "Chronic"} ]
-
-Create a New Patient POST /patients Authorization: Bearer Content-Type: application/json
-
-{ "name": "John Doe", "age": 45, "diagnosis_id": 2 }
+By default, the API will run at:
+http://127.0.0.1:5000/
 
 ## API Endpoints
-Endpoint Method Description JWT Required Params/Body /login POST Login and get JWT token No JSON: username, password /diagnosis GET Get all diagnoses No ?format=json/xml /diagnosis/ GET Get single diagnosis No id in URL /diagnosis POST Create diagnosis Yes JSON: diagnosis_name, category /diagnosis/ PUT Update diagnosis Yes JSON: diagnosis_name, category /diagnosis/ DELETE Delete diagnosis Yes id in URL /patients GET Get all patients No ?format=json/xml /patients/ GET Get single patient No id in URL /patients POST Create patient Yes JSON: name, age, diagnosis_id /patients/ PUT Update patient Yes JSON: name, age, diagnosis_id /patients/ DELETE Delete patient Yes id in URL /assignments GET Get all assignments No ?format=json/xml /assignments POST Create assignment Yes JSON: doctor_id, patient_id, diagnosis_id /assignments DELETE Delete assignment Yes Query: doctor_id, patient_id, diagnosis_id Running Tests
+Authentication
 
-You can test endpoints using Postman or curl.
+POST /login
+Request Body: { "username": "admin", "password": "1234" }
+Response: { "token": "JWT_TOKEN_HERE" }
 
-## RUNNING TEST
+Diagnosis
+
+GET /diagnosis – list all diagnoses
+Optional format: /diagnosis?format=xml or ?format=json
+
+GET /diagnosis/<id> – get diagnosis by ID
+
+POST /diagnosis – create diagnosis (requires JWT)
+
+PUT /diagnosis/<id> – update diagnosis (requires JWT)
+
+DELETE /diagnosis/<id> – delete diagnosis (requires JWT)
+
+Doctors
+
+GET /doctors – list all doctors
+
+GET /doctors/<id> – get doctor by ID
+
+POST /doctors – create doctor (requires JWT)
+
+Patients
+
+GET /patients – list all patients, optionally in XML or JSON
+
+Assignments
+
+GET /assignments – list assignments linking doctors and patients
+
+JWT Authentication
+Use the token received from /login in the Authorization header
+Authorization: Bearer <JWT_TOKEN>
+
+
+Required for POST, PUT, DELETE endpoints.
+
+Example Requests
+# Login
+curl -X POST http://127.0.0.1:5000/login -H "Content-Type: application/json" -d '{"username":"admin","password":"1234"}'
+
+# Get diagnoses in JSON
+curl http://127.0.0.1:5000/diagnosis?format=json
+
+# Get patients in XML
+curl http://127.0.0.1:5000/patients?format=xml
+
+## Running Tests
+Make sure the virtual environment is active.
+
+## Run all tests
+pytest -v
 pytest tests/
+
+Tests cover all CRUD operations, error handling, and format options (JSON/XML).
+
